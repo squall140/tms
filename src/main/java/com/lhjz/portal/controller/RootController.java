@@ -97,7 +97,7 @@ public class RootController extends BaseController {
 	
 	@RequestMapping()
 	public String index() {
-		return "forward:index.html";
+		return "forward:/admin/login";
 	}
 
 	@RequestMapping("home")

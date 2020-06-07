@@ -158,17 +158,17 @@ public class UserController extends BaseController {
 
 		final String loginUrl = baseURL + loginAction + "?username=" + userForm.getUsername() + "&password="
 				+ userForm.getPassword();
-
-		try {
-			mailSender
-					.sendHtmlByQueue(String.format("TMS-用户创建_%s", DateUtil.format(new Date(), DateUtil.FORMAT7)),
-							TemplateUtil.process("templates/mail/user-create",
-									MapUtil.objArr2Map("user", userForm2, "userRole", userRole, "href", href,
-											"loginUrl", loginUrl, "baseUrl", baseUrl)),
-							new MailAddr(user.getMails(), user.getName()));
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+//
+//		try {
+//			mailSender
+//					.sendHtmlByQueue(String.format("TMS-用户创建_%s", DateUtil.format(new Date(), DateUtil.FORMAT7)),
+//							TemplateUtil.process("templates/mail/user-create",
+//									MapUtil.objArr2Map("user", userForm2, "userRole", userRole, "href", href,
+//											"loginUrl", loginUrl, "baseUrl", baseUrl)),
+//							new MailAddr(user.getMails(), user.getName()));
+//		} catch (Exception e) {
+//			e.printStackTrace();
+//		}
 
 		return RespBody.succeed(user.getUsername());
 	}

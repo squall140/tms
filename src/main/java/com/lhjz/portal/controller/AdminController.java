@@ -3,6 +3,7 @@
  */
 package com.lhjz.portal.controller;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
@@ -63,6 +64,8 @@ import com.lhjz.portal.util.CollectionUtil;
 import com.lhjz.portal.util.JsonUtil;
 import com.lhjz.portal.util.StringUtil;
 import com.lhjz.portal.util.WebUtil;
+
+import javax.servlet.http.HttpServletResponse;
 
 /**
  * 
@@ -132,16 +135,18 @@ public class AdminController extends BaseController {
 
 	@RequestMapping()
 	public String home(Model model) {
+		return "redirect:/page/index.html#/blog";
 
-		model.addAttribute("cntProject", projectRepository.count());
-		model.addAttribute("cntUser", userRepository.count());
-		model.addAttribute("cntLanguage", languageRepository.count());
-		model.addAttribute("cntTranslate", translateRepository.count());
-		model.addAttribute("cntChat", chatRepository.count());
-		model.addAttribute("cntChannel", channelRepository.countChannels());
-		model.addAttribute("cntBlog", blogRepository.countBlogs());
+//		model.addAttribute("cntProject", projectRepository.count());
+//		model.addAttribute("cntUser", userRepository.count());
+//		model.addAttribute("cntLanguage", languageRepository.count());
+//		model.addAttribute("cntTranslate", translateRepository.count());
+//		model.addAttribute("cntChat", chatRepository.count());
+//		model.addAttribute("cntChannel", channelRepository.countChannels());
+//		model.addAttribute("cntBlog", blogRepository.countBlogs());
 
-		return "admin/index";
+//		return "admin/index";
+
 	}
 
 	@RequestMapping("user")
