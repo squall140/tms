@@ -440,6 +440,8 @@ public final class WebUtil {
 
 			if (principal instanceof UserDetails) {
 				return ((UserDetails) principal).getUsername();
+			} else if (principal.equals("anonymousUser")){
+				return "guest";
 			} else {
 				return principal.toString();
 			}

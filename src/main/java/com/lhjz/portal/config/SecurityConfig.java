@@ -10,6 +10,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 import org.springframework.core.annotation.Order;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -108,33 +109,26 @@ public class SecurityConfig {
 		protected void configure(HttpSecurity http) throws Exception {
 
 			// @formatter:off
-			http
-				.authorizeRequests()
-				.antMatchers("/admin/**", "/api/**", "/ws/**")
-					.authenticated()
-				.and()
-					.exceptionHandling()
-					.authenticationEntryPoint(authenticationEntryPoint())
-				.and().httpBasic()
+			http.httpBasic().disable();
+			http.csrf().disable();
+			http.anonymous();
+			http.exceptionHandling().authenticationEntryPoint(authenticationEntryPoint());
+			http.rememberMe().tokenRepository(persistentTokenRepository()).tokenValiditySeconds(1209600);
+
+			http.authorizeRequests()
+					.antMatchers("/admin/user/**", "/admin/link/**", "/admin/blog/**", "/admin/space/**", "/ws/**").permitAll()
+					.antMatchers("/admin/**", "/api/**").authenticated()
 				.and()
 					.formLogin()
-					.loginPage("/admin/login")
-					.permitAll()
+					.loginPage("/admin/login").permitAll()
 					.loginProcessingUrl("/admin/signin")
 					.successHandler(loginSuccessHandler)
 					.failureHandler(ajaxSimpleUrlAuthenticationFailureHandler)
 				.and()
 					.logout()
-					.logoutUrl("/admin/logout")
-					.permitAll()
-					.logoutSuccessHandler(logoutSuccessHandler())
-				.and()
-					.rememberMe()
-					.tokenRepository(persistentTokenRepository())
-					.tokenValiditySeconds(1209600)
-				.and()
-					.csrf()
-					.disable();
+					.logoutUrl("/admin/logout").permitAll()
+					.logoutSuccessHandler(logoutSuccessHandler());
+
 			// @formatter:on
 		}
 

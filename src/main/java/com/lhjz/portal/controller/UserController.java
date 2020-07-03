@@ -471,7 +471,7 @@ public class UserController extends BaseController {
 
 	@RequestMapping(value = "loginUser", method = RequestMethod.GET)
 	@ResponseBody
-	@Secured({ "ROLE_ADMIN", "ROLE_USER" })
+	@Secured({ "ROLE_ADMIN", "ROLE_USER", "ROLE_ANONYMOUS" })
 	public RespBody loginUser() {
 
 		return RespBody.succeed(getLoginUser());
@@ -479,7 +479,7 @@ public class UserController extends BaseController {
 
 	@RequestMapping(value = "all", method = RequestMethod.GET)
 	@ResponseBody
-	@Secured({ "ROLE_ADMIN", "ROLE_USER" })
+	@Secured({ "ROLE_ADMIN", "ROLE_USER" ,"ROLE_ANONYMOUS"})
 	public RespBody getAllUsers(@RequestParam(value = "enabled", required = false) Boolean enabled) {
 
 		List<User> users = null;
